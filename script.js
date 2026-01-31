@@ -555,6 +555,47 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializeFAQ, 100);
 
     // ========================================
+    // Progressive Image Loading
+    // ========================================
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                
+                // Add loaded class when image is fully loaded
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                }
+                
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px' // Start loading 50px before image enters viewport
+    });
+    
+    lazyImages.forEach(img => {
+        imageObserver.observe(img);
+    });
+    
+    // Handle images that are already loaded (from cache)
+    document.querySelectorAll('img[loading="eager"]').forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+            });
+        }
+    });
+
+    // ========================================
     // Console Easter Egg
     // ========================================
     console.log('%c🛡️ FIT4FORCE', 'font-size: 24px; font-weight: bold; color: #00D4FF;');
