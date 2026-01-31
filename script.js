@@ -543,11 +543,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (question) {
                 question.style.cursor = 'pointer';
                 
-                question.addEventListener('click', function(e) {
+                // Handle both click and touch events for mobile
+                const handleToggle = function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    console.log('FAQ item clicked:', index);
+                    console.log('FAQ item triggered:', index);
                     
                     // Toggle current item
                     const isActive = item.classList.contains('active');
@@ -560,10 +561,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     // If it wasn't active, make it active
                     if (!isActive) {
                         item.classList.add('active');
+                        console.log('FAQ item activated:', index);
                     }
-                    
-                    console.log('FAQ item active state:', item.classList.contains('active'));
-                });
+                };
+                
+                // Add both click and touchend events
+                question.addEventListener('click', handleToggle);
+                question.addEventListener('touchend', handleToggle);
             }
         });
     }
