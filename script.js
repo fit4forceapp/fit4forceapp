@@ -11,13 +11,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================================
     const navbar = document.getElementById('navbar');
     const heroSection = document.getElementById('hero');
+    let lastScrollY = 0;
 
     function handleNavbarScroll() {
-        if (window.scrollY > 50) {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 50) {
             navbar.classList.add('scrolled');
+            
+            // Hide navbar on scroll down, show on scroll up (mobile)
+            if (window.innerWidth <= 768) {
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    navbar.classList.add('hidden');
+                } else {
+                    navbar.classList.remove('hidden');
+                }
+            }
         } else {
             navbar.classList.remove('scrolled');
+            navbar.classList.remove('hidden');
         }
+        
+        lastScrollY = currentScrollY;
     }
 
     window.addEventListener('scroll', handleNavbarScroll);
@@ -30,17 +45,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.getElementById('mobileMenu');
 
     if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             mobileMenu.classList.toggle('active');
             
             // Toggle icon
-            const icon = mobileMenuBtn.querySelector('svg');
-            if (mobileMenu.classList.contains('active')) {
-                icon.setAttribute('data-lucide', 'x');
-            } else {
-                icon.setAttribute('data-lucide', 'menu');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                if (mobileMenu.classList.contains('active')) {
+                    icon.setAttribute('data-lucide', 'x');
+                } else {
+                    icon.setAttribute('data-lucide', 'menu');
+                }
+                lucide.createIcons();
             }
-            lucide.createIcons();
         });
 
         // Close mobile menu when clicking on links
@@ -48,10 +67,26 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
                 mobileMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('svg');
-                icon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                }
             });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (icon) {
+                        icon.setAttribute('data-lucide', 'menu');
+                        lucide.createIcons();
+                    }
+                }
+            }
         });
     }
 

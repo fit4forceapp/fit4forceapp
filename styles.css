@@ -117,7 +117,12 @@ img.loaded {
     width: 100%;
     padding: 16px 48px;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0.3s ease;
+    transform: translateY(0);
+}
+
+.navbar.hidden {
+    transform: translateY(-100%);
 }
 
 .navbar.scrolled {
