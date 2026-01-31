@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.fit4force.ng/sitemap.xml
+Sitemap: https://fit4forceapp.github.io/fit4forceapp/sitemap.xml
 
 # Disallow admin or private paths (if any)
 # Disallow: /admin/
