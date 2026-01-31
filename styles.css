@@ -90,7 +90,7 @@ img {
     max-width: 100%;
     height: auto;
     /* Blur-up loading effect */
-    background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+    background: transparent;
     transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
@@ -157,18 +157,21 @@ img.loaded {
     width: 45px;
     height: 45px;
     object-fit: contain;
+    background: transparent;
 }
 
 .logo-img-small {
     width: 36px;
     height: 36px;
     object-fit: contain;
+    background: transparent;
 }
 
 .cta-logo-img {
     width: 60px;
     height: 60px;
     object-fit: contain;
+    background: transparent;
 }
 
 .logo-icon {
@@ -559,6 +562,7 @@ img.loaded {
 
 .playstore-btn img {
     height: 60px;
+    background: transparent;
 }
 
 .hero-logo-small {
