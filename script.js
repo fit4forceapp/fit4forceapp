@@ -496,24 +496,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', highlightNavLink);
 
     // ========================================
-    // Lazy Loading Images (if any)
-    // ========================================
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    lazyImages.forEach(img => imageObserver.observe(img));
-
-    // ========================================
     // FAQ Functionality
     // ========================================
     function initializeFAQ() {
