@@ -910,6 +910,19 @@ img.loaded {
     direction: ltr;
 }
 
+/* Elite block animation from left */
+.feature-block.elite-block {
+    direction: ltr;
+}
+
+.feature-block.elite-block .feature-image {
+    order: 1;
+}
+
+.feature-block.elite-block .feature-content-block {
+    order: 2;
+}
+
 /* Feature Phone Mockups */
 .phone-mockup-small {
     display: flex;
