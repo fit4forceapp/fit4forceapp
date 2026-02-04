@@ -1,12 +1,18 @@
 // Service Worker for caching images and assets
-const CACHE_NAME = 'fit4force-v1';
+const CACHE_NAME = 'fit4force-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/styles.css',
   '/script.js',
   '/sitemap.xml',
-  '/robots.txt'
+  '/robots.txt',
+  '/assets/images/hero-section-dashboard-screen-shot.png',
+  '/assets/images/fitness-plan.png',
+  '/assets/images/Exam-Prep.png',
+  '/assets/images/connect-with-Aspiriants.png',
+  '/assets/images/broaden-your-knowledge.png',
+  '/assets/images/Elite-section-screen.png'
 ];
 
 // Install event - cache assets
